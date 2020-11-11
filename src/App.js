@@ -1,9 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect} from 'react';
 import './App.css';
-import logoReal from './Assets/cat.png';
-import Comentario from './Components/Comentario/comentario';
+
 import Postagem from './Components/Postagem/postagem';
+import PostagemExpandida from './Components/Postagem/postagemExpandida';
+import PostList from './Components/Postagem/postList';
+import Cabecalho from './Components/Cabecalho/cabecalho';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
@@ -13,9 +14,29 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
+import api from './Services/api';
+import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
 
 function App() {
 
+  const [categories, setCategories] = useState("");
+  /*
+  useEffect(() => {
+    api.get('/categories', {
+      headers: {
+        'Authorization': 'Qualquer Coisa'
+      }
+    })
+    .then((res) => {
+      setCategories(res.data)
+      console.log(categories)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  });*/
+
+  // Estilos
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -36,6 +57,7 @@ function App() {
     },
   }));
 
+  // Metodos
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
@@ -47,44 +69,38 @@ function App() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  // API
   
 
+  // HTML
   return (
     <div className="App">
       <Container maxWidth="md">
         <Grid container spacing={3}>
+          <Cabecalho/>
+        
           <Grid item xs={12}>
-            <img src={logoReal} className="App-logo" />
-            <h1>Projeto Leitura</h1>
-          </Grid>
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <Grid item xs={12}>
+                    <NavLink exact to="/categoria"><Chip avatar={<Avatar>1</Avatar>} label="Categoria 1" ></Chip></NavLink>
+                    <NavLink exact to="/categoria"><Chip avatar={<Avatar>2</Avatar>} label="Categoria 2"></Chip></NavLink>
+                    <NavLink exact to="/postagem"><Chip avatar={<Avatar>3</Avatar>} label="Categoria 3" ></Chip></NavLink>
+                  </Grid>
 
-          <Grid item xs={12}>
-            <Chip avatar={<Avatar>M</Avatar>} label="Ficção Cientifica" onClick={handleClick} />
-            <Chip avatar={<Avatar>M</Avatar>} label="Drama" onClick={handleClick} />
-            <Chip avatar={<Avatar>M</Avatar>} label="Comedia" onClick={handleClick} />
+                  <PostList/>
+                </Route>
+                <Route exact path="/categoria">
+                  
+                </Route>
+                <Route exact path="/postagem">
+                  <PostagemExpandida/>
+                </Route>
+              </Switch>
+            </Router>
           </Grid>
-
-          <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">Ordenar Por</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={age}
-                onChange={handleChange}
-                label="Age"
-              >
-                <MenuItem value="">
-                </MenuItem>
-                <MenuItem value={10}>Vote Score</MenuItem>
-                <MenuItem value={20}>Data de Criação</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={4}><Postagem/></Grid>
-          <Grid item xs={4}><Postagem/></Grid>
-          <Grid item xs={4}><Postagem/></Grid>
         </Grid>
       </Container>
       
