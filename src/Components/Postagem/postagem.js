@@ -47,7 +47,7 @@ export default function PostagemCard(props) {
           </Badge>
           <Button size="small" color="primary">
           <Router>
-              <Link to="/postagem">Leia Mais</Link>
+              <Link gutterBottom to="/postagem">Leia Mais</Link>
           </Router>
           </Button>
         </CardActions>

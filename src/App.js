@@ -55,6 +55,9 @@ function App() {
       height: 48,
       padding: '0 30px',
     },
+    buttonPadding: {    
+      paddingBottom: '40px',   
+    },
   }));
 
   // Metodos
@@ -84,19 +87,16 @@ function App() {
             <Router>
               <Switch>
                 <Route exact path="/">
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.buttonPadding}>
                     <NavLink exact to="/categoria"><Chip avatar={<Avatar>1</Avatar>} label="Categoria 1" ></Chip></NavLink>
                     <NavLink exact to="/categoria"><Chip avatar={<Avatar>2</Avatar>} label="Categoria 2"></Chip></NavLink>
                     <NavLink exact to="/postagem"><Chip avatar={<Avatar>3</Avatar>} label="Categoria 3" ></Chip></NavLink>
                   </Grid>
-
                   <PostList/>
                 </Route>
-                <Route exact path="/categoria">
-                  
-                </Route>
+                <Route exact path="/categoria"></Route>
                 <Route exact path="/postagem">
-                  <PostagemExpandida/>
+                  <PostagemExpandida id="8xf0y6ziyjabvozdd253nd"/>
                 </Route>
               </Switch>
             </Router>

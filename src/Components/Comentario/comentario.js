@@ -1,17 +1,28 @@
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import api from '../../Services/api';
+import Divider from '@material-ui/core/Divider';
+import Comentario from '../Comentario/comentario';
+import './comentario.css';
 
-const comentario = () => {
+export default class PostagemExpandida extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
-        <div>
-            <p>Titulo Maneiro Aqui</p>
-            <p>Lorem ipsum dolor sit amnet</p>
-            <Button variant="contained" color="primary">
-                Hello World
-            </Button>
-        </div>
+      <div className="Comment">
+        <Typography variant="subtitle2" className="Comment-Title" gutterBottom>
+        {this.props.author} Escreveu:
+        </Typography>
+        <Typography variant="body2" className="Comment-Body" gutterBottom>
+          {this.props.body}
+        </Typography>
+        <Divider />
+      </div>
     )
-};
-
-export default comentario;
+  }
+}
