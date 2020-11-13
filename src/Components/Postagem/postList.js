@@ -1,11 +1,8 @@
 import React from 'react';
-
-import axios from 'axios';
-
 import api from '../../Services/api';
 import Postagem from '../Postagem/postagem';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
 
 export default class PostList extends React.Component {
   state = {
@@ -29,9 +26,11 @@ export default class PostList extends React.Component {
 
   render() {
     return (
-      <Grid container spacing={3}>
-          { this.state.posts.map(posts =><Postagem title={posts.title} body={posts.body}/>)}
-      </Grid>
+      <div>
+        <Grid container spacing={3}>
+          { this.state.posts.map(posts =><Postagem title={posts.title} body={posts.body} id={posts.id}/>)}
+        </Grid>
+      </div>
     )
   }
 }

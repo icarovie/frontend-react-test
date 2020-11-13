@@ -1,16 +1,13 @@
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Typography from '@material-ui/core/Typography';
-import api from '../../Services/api';
+
 import Divider from '@material-ui/core/Divider';
-import Comentario from '../Comentario/comentario';
+
 import './comentario.css';
 
 export default class PostagemExpandida extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

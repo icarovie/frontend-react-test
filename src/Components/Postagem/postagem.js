@@ -10,12 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Badge from '@material-ui/core/Badge';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -46,9 +41,7 @@ export default function PostagemCard(props) {
               <FavoriteIcon />
           </Badge>
           <Button size="small" color="primary">
-          <Router>
-              <Link gutterBottom to="/postagem">Leia Mais</Link>
-          </Router>
+            <NavLink exact to={`/postagem/${props.id}`}>Leia Mais</NavLink>
           </Button>
         </CardActions>
       </Card>

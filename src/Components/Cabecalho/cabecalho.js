@@ -12,7 +12,7 @@ export default function MediaCard() {
 
   return (
     <Grid item xs={12}>
-        <img src={logoReal} className="App-logo" />
+        <img src={logoReal} className="App-logo" alt="logo" />
         <h1>Projeto Leitura</h1>
     </Grid>
   );

@@ -1,40 +1,40 @@
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import api from '../../Services/api';
-import Divider from '@material-ui/core/Divider';
 import Comentario from '../Comentario/comentario';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import './postagem.css';
+import Button from '@material-ui/core/Button';
+import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
 
 export default class PostagemExpandida extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   state = {
     post: [],
     comments: [],
+    id: this.props.match.params.id
   }
 
   componentDidMount() {
-    api.get(`/posts/${this.props.id}`,{
-        headers: {
-            'Authorization': 'Qualquer Coisa'
-          }
+    // Posts
+    api.get(`/posts/${this.state.id}`,{
+      headers: {
+          'Authorization': 'Qualquer Coisa'
+        }
     })
     .then(res => {
       const post= res.data;
-      console.log(res.data)
       this.setState({ post });
     })
     .catch((error) => {
       console.error(error)
     })
     
-    api.get(`/posts/${this.props.id}/comments`,{
+    // Comentarios do Post
+    api.get(`/posts/${this.state.id}/comments`,{
       headers: {
           'Authorization': 'Qualquer Coisa'
         }
@@ -52,6 +52,7 @@ export default class PostagemExpandida extends React.Component {
   render() {
     return (
       <div>
+        <NavLink exact to="/"><Button className="button-back" variant="contained">Voltar</Button></NavLink>
         <Typography variant="h2" gutterBottom>{this.state.post.title}</Typography>
         <Typography variant="subtitle2" gutterBottom>Author: {this.state.post.author}</Typography>
         <Chip color="primary" label={this.state.post.category}></Chip>
@@ -62,6 +63,10 @@ export default class PostagemExpandida extends React.Component {
           { this.state.comments.map(comments =>
             <Comentario body={comments.body} author={comments.author} />
           )}
+
+        <form noValidate autoComplete="off">
+          <TextField id="outlined-basic" fullWidth label="Adicione um Comentario" variant="outlined" />
+        </form>
         </Grid>
       </div>
     )
