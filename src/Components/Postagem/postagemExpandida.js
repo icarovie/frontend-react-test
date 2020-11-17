@@ -7,7 +7,7 @@ import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import './postagem.css';
 import Button from '@material-ui/core/Button';
-import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 
 export default class PostagemExpandida extends React.Component {

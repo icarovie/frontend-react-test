@@ -14,3 +14,25 @@
     margin-bottom: 20px;
     text-align: left;
 }
+
+.form-cadastro{
+    width:500px;
+    margin:auto;
+}
+
+.form-cadastro .input-text{
+    margin-bottom:20px;
+}
+
+.form-cadastro .tittle{
+    margin-top:30px;
+}
+
+.form-cadastro .control{
+    min-width:500px;
+}
+
+.form-cadastro .input-select{
+    margin-top:20px;
+    margin-bottom:30px;
+}

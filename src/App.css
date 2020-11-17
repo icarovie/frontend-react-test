@@ -35,3 +35,7 @@
   max-width: 345px;
   height: 140px;
 }
+
+.newPostButton{
+  direction:right;
+}

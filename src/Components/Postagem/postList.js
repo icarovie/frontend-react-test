@@ -2,13 +2,21 @@ import React from 'react';
 import api from '../../Services/api';
 import Postagem from '../Postagem/postagem';
 import Grid from '@material-ui/core/Grid';
-import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
 
 export default class PostList extends React.Component {
   state = {
-    posts: []
+    posts: [],
+    //category: this.props.match.params.name,
   }
-
+  /*handleCategory = e =>{
+    switch (e) {
+      default:
+        this.requestURL = `${this.category}/posts`;
+        break;
+      case 'all':
+        this.requestURL = "/posts";
+    }
+  }*/
   componentDidMount() {
     api.get(`/posts`,{
         headers: {
@@ -22,13 +30,15 @@ export default class PostList extends React.Component {
     .catch((error) => {
     console.error(error)
     })
+
+    console.log(this.posts)
   }
 
   render() {
     return (
       <div>
         <Grid container spacing={3}>
-          { this.state.posts.map(posts =><Postagem title={posts.title} body={posts.body} id={posts.id}/>)}
+          { this.state.posts.map(posts =><Postagem title={posts.title} body={posts.body} id={posts.id} voteScore={posts.voteScore}/>)}
         </Grid>
       </div>
     )

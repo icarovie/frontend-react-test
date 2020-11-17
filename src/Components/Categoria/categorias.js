@@ -2,7 +2,7 @@ import React from 'react';
 import api from '../../Services/api';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
-import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import './categorias.css';
 
 export default class Categorias extends React.Component {

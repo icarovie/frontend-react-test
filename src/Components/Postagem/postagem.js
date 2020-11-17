@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Badge from '@material-ui/core/Badge';
-import {BrowserRouter as Router,Switch,Route,NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +37,7 @@ export default function PostagemCard(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={props.voteScore} color="secondary">
               <FavoriteIcon />
           </Badge>
           <Button size="small" color="primary">
