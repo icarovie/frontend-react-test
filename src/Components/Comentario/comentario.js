@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Divider from '@material-ui/core/Divider';
 
-import './comentario.css';
+//import './comentario.css';
 
 export default class PostagemExpandida extends React.Component {
 

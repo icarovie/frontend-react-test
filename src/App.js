@@ -25,11 +25,11 @@ function App() {
               <Switch>
                 <Route exact path="/">
                   <Categorias/>
-                  <PostList/>
-                  <NavLink exact to="cadastrar/postagem">
-                  <Fab color="primary" aria-label="add">
-                    <AddIcon />
-                  </Fab>
+                  <PostList />
+                  <NavLink className="newPostButton" exact to="cadastrar/postagem">
+                    <Fab color="primary" aria-label="add">
+                      <AddIcon/>
+                    </Fab>
                   </NavLink>
                 </Route>
                 <Route exact path="/categoria/:name" component={PostList}></Route>

@@ -52,10 +52,15 @@ export default class FormPostagem extends React.Component {
     this.setState({ category: '' });
   }
 
+  createRandomID = () => {
+		return '_' + Math.random().toString(36).substr(2, 9);
+	}
+
   handleSubmit = event => {
     event.preventDefault();
 
     const post = {
+      id: this.createRandomID(),
       title: this.state.title,
       author: this.state.author,
       body: this.state.body,

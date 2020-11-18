@@ -6,18 +6,21 @@ import Grid from '@material-ui/core/Grid';
 export default class PostList extends React.Component {
   state = {
     posts: [],
-    //category: this.props.match.params.name,
+    category: '',
+    requestURL:'/posts'
   }
-  /*handleCategory = e =>{
-    switch (e) {
-      default:
-        this.requestURL = `${this.category}/posts`;
-        break;
-      case 'all':
-        this.requestURL = "/posts";
+
+  /*
+  handleCategory = () =>{
+    if(this.props.match.params.name !== undefined){
+      this.setState({ category: this.props.match.params.name});
+      this.setState({ requestURL: `/${this.props.match.params.name}/posts`})
     }
+
   }*/
   componentDidMount() {
+    //this.handleCategory();
+
     api.get(`/posts`,{
         headers: {
             'Authorization': 'Qualquer Coisa'
