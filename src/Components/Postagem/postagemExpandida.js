@@ -10,6 +10,7 @@ import './postagem.css';
 import Button from '@material-ui/core/Button';
 import {NavLink, Redirect} from "react-router-dom";
 import Icon from '@material-ui/core/Icon';
+import PostVote from './postVote';
 
 export default class PostagemExpandida extends React.Component {
   
@@ -69,7 +70,6 @@ export default class PostagemExpandida extends React.Component {
     })
     .then(res => {
       const comments= res.data;
-      console.log(res.data)
       this.setState({ comments });
     })
     .catch((error) => {
@@ -85,15 +85,15 @@ export default class PostagemExpandida extends React.Component {
         <NavLink exact to="/">
           <Button variant="contained" className="button-back" color="primary" endIcon={<Icon>reply</Icon>}>Voltar</Button>
         </NavLink>
-        <NavLink exact to="/"><Button variant="contained" className="button-edit" color="primary" endIcon={<Icon>edit</Icon>}>Edit</Button></NavLink>
+        <NavLink exact to={`/editar/postagem/${this.state.id}`}><Button variant="contained" className="button-edit" color="primary" endIcon={<Icon>edit</Icon>}>Edit</Button></NavLink>
         <Button variant="contained" className="button-delete" color="primary" endIcon={<Icon>delete</Icon>} onClick={this.handleDelete}>Delete</Button>
         </div>  
         <Typography variant="h2" gutterBottom>{this.state.post.title}</Typography>
         <Typography variant="subtitle2" gutterBottom>Author: {this.state.post.author}</Typography>
         <Chip color="primary" label={this.state.post.category}></Chip>
         <Typography variant="body2" className="Post-Body">{this.state.post.body}</Typography>
+        <PostVote PostID={this.props.match.params.id}/>
 
-        
         <Grid item xs={12}>
           <Typography variant="h6" className="Comment-Header" gutterBottom>Comentários</Typography>
           { this.state.comments.map(comments =>

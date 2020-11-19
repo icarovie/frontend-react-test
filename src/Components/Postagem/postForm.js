@@ -16,13 +16,45 @@ import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 
 export default class FormPostagem extends React.Component {
-  
   state = {
       title:'',
       author:'',
       body:'',
       category:'',
-      open: false
+      open: false,
+      postID: this.props.match.params?.id,
+      headerTitle: 'Cadastrar Nova Postagem',
+      buttonSave: 'Cadastrar',
+      fieldSituation: false,
+      messageText: 'Postagem cadastrada com sucesso!'
+  
+  }
+
+  componentDidMount(){
+    if(this.state.postID !== undefined){
+      this.setState({ headerTitle: 'Editar Postagem'});
+      this.setState({ buttonSave: 'Salvar'});
+      this.setState({ fieldSituation: true});
+      this.getPostData(this.state.postID);
+    }
+  }
+
+  getPostData = id =>{
+    api.get(`/posts/${id}`,{
+      headers: {
+          'Authorization': 'Qualquer Coisa'
+        }
+    })
+    .then(res => {
+      const post= res.data;
+      this.setState({ title: post.title });
+      this.setState({ body: post.body });
+      this.setState({ author: post.author });
+      this.setState({ category: post.category });
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   }
 
   handleChangeTitle = event => {
@@ -54,11 +86,34 @@ export default class FormPostagem extends React.Component {
 
   createRandomID = () => {
 		return '_' + Math.random().toString(36).substr(2, 9);
-	}
-
-  handleSubmit = event => {
+  }
+  
+  handlePostCreateOrEdit = event => {
     event.preventDefault();
+    if(this.state.postID !== undefined){
+      this.handleSubmitEdit();
+    } else{
+      this.handleSubmitCreate();
+    }
+  }
 
+  handleSubmitEdit = () => {
+    const postEdit = {
+      title: this.state.title,
+      body: this.state.body
+    };
+  
+    api.put(`/posts/${this.state.postID}`, postEdit, {headers: {
+      'Authorization': 'Qualquer Coisa'
+    }} )
+      .then(res => {
+        this.setState({ messageText: 'Postagem editada com sucesso!' });
+        this.clearInput();
+        this.setOpen(true);
+      })
+  }
+
+  handleSubmitCreate = event => {
     const post = {
       id: this.createRandomID(),
       title: this.state.title,
@@ -66,16 +121,12 @@ export default class FormPostagem extends React.Component {
       body: this.state.body,
       category: this.state.category,
       timestamp: Date.now(),
-
     };
 
     api.post(`/posts`, post, {headers: {
       'Authorization': 'Qualquer Coisa'
     }} )
       .then(res => {
-        console.log(res);
-        console.log(res.data);
-        this.clearInput();
         this.setOpen(true);
       })
   }
@@ -99,32 +150,33 @@ export default class FormPostagem extends React.Component {
                 </IconButton>
               }
             >
-              Postagem cadastrada com sucesso!
+              {this.state.messageText}
             </Alert>
           </Collapse>
-        <form onSubmit={this.handleSubmit} noValidate className="form-cadastro" autoComplete="off">
-            <Typography className="tittle" variant="h6" gutterBottom>CADASTRAR NOVA POSTAGEM</Typography>
-            <TextField className="input-text" id="outlined-basic" name="title" fullWidth label="Titulo" value={this.state.title} onChange={this.handleChangeTitle} variant="outlined" />
-            <TextField className="input-text" id="outlined-basic" name="author" fullWidth label="Author" value={this.state.author} onChange={this.handleChangeAuthor} variant="outlined" />
-            <TextField className="input-text" id="outlined-basic" name="body" fullWidth label="Body"value={this.state.body} onChange={this.handleChangeBody} variant="outlined" />
-            <FormControl variant="outlined" className="control">
-              <InputLabel id="demo-simple-select-outlined-label">Categoria</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={this.state.category}
-                onChange={this.handleChangeCategory}
-                label="Categoria"
-              >
-                <MenuItem value="">
-                  <em>Nenhuma</em>
-                </MenuItem>
-                <MenuItem value={'react'}>React</MenuItem>
-                <MenuItem value={'redux'}>Redux</MenuItem>
-                <MenuItem value={'udacity'}>Udacity</MenuItem>
-              </Select>
-            </FormControl>
-            <Button variant="contained" type="submit" color="primary">Cadastrar</Button>
+        <form onSubmit={this.handlePostCreateOrEdit} noValidate className="form-cadastro" autoComplete="off">
+          <Typography className="tittle" variant="h6" gutterBottom>{this.state.headerTitle}</Typography>
+          <TextField className="input-text" id="outlined-basic" name="title" fullWidth label="Titulo" value={this.state.title} onChange={this.handleChangeTitle} variant="outlined" />
+          <TextField className="input-text" disabled={this.state.fieldSituation} id="outlined-basic" name="author" fullWidth label="Author" value={this.state.author} onChange={this.handleChangeAuthor} variant="outlined" />
+          <TextField className="input-text" id="outlined-basic" name="body" fullWidth label="Body"value={this.state.body} onChange={this.handleChangeBody} variant="outlined" />
+          <FormControl variant="outlined" className="control">
+            <InputLabel id="demo-simple-select-outlined-label">Categoria</InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              disabled={this.state.fieldSituation}
+              value={this.state.category}
+              onChange={this.handleChangeCategory}
+              label="Categoria"
+            >
+              <MenuItem value="">
+                <em>Nenhuma</em>
+              </MenuItem>
+              <MenuItem value={'react'}>React</MenuItem>
+              <MenuItem value={'redux'}>Redux</MenuItem>
+              <MenuItem value={'udacity'}>Udacity</MenuItem>
+            </Select>
+          </FormControl>
+          <Button variant="contained" type="submit" color="primary">{this.state.buttonSave}</Button>
         </form>  
       </div>
     )

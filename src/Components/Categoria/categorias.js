@@ -29,7 +29,7 @@ export default class Categorias extends React.Component {
     return (
         <Grid className="categorias" item xs={12}>
             { this.state.categories.map(categories =>
-                <NavLink className="categorias-link" exact to={`categoria/${categories.path}`}><Chip label={categories.name}/></NavLink>
+                <NavLink key={categories.name} className="categorias-link" exact to={`categoria/${categories.path}`}><Chip label={categories.name}/></NavLink>
             )}
         </Grid>
     )

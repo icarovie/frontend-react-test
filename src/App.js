@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import PostagemExpandida from './Components/Postagem/postagemExpandida';
 import PostList from './Components/Postagem/postList';
@@ -35,6 +35,7 @@ function App() {
                 <Route exact path="/categoria/:name" component={PostList}></Route>
                 <Route exact path="/postagem/:id" component={PostagemExpandida}></Route>
                 <Route exact path="/cadastrar/postagem" component={FormPostagem}></Route>
+                <Route exact path="/editar/postagem/:id" component={FormPostagem}></Route>
               </Switch>
             
           </Grid>
