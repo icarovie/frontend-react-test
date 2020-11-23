@@ -3,8 +3,16 @@
 
 ## Porque?
 
-Esta estrutura de conteúdo e comentários é comum em um grande número de sites, desde sites de notícias até blogs, passando por agregadores, como o Hacker News e o Reddit. Construindo este projeto, você compreenderá como o Redux pode funcionar em um tipo muito comum de aplicativo.
+Esta estrutura de conteúdo e comentários é comum em um grande número de sites, desde sites de notícias até blogs, passando por agregadores, como o Hacker News e o Reddit. A ideia deste projeto, é compreender um pouco mais sobre React e como Redux pode funcionar neste tipo de projeto.
 
+### Esse sistema utiliza um backend externo, será necessário clona-lo
+
+A documentação da API encontra-se disponivel no readme do projeto, mas
+basicamente clone o projeto, e rode `npm install`, e posteriormente `node server`
+
+Após isso, estaremos prontos pra rodar essa aplicação front-end
+
+https://github.com/udacity/reactnd-project-readable-starter/tree/master/api-server
 
 ### `Instalacao`
 
