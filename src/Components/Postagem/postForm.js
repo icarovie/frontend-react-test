@@ -31,7 +31,7 @@ export default class FormPostagem extends React.Component {
   }
 
   componentDidMount(){
-    if(this.state.postID !== undefined){
+    if(this.state.postID){
       this.setState({ headerTitle: 'Editar Postagem'});
       this.setState({ buttonSave: 'Salvar'});
       this.setState({ fieldSituation: true});
@@ -90,7 +90,7 @@ export default class FormPostagem extends React.Component {
   
   handlePostCreateOrEdit = event => {
     event.preventDefault();
-    if(this.state.postID !== undefined){
+    if(this.state.postID){
       this.handleSubmitEdit();
     } else{
       this.handleSubmitCreate();

@@ -56,8 +56,6 @@ export default class FormPostagem extends React.Component {
       'Authorization': 'Qualquer Coisa'
     }} )
       .then(res => {
-        console.log(res);
-        console.log(res.data);
         this.clearInput();
         this.setOpen(true);
       })

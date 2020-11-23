@@ -5,33 +5,26 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 
 export default class PostVote extends React.Component {
-  
-  state = {
-      option: ''
-  }
 
-  handleSubmit = () => {
+  handleSubmit = optionVote => {
     const vote = {
-      option: this.state.option,
+      option: optionVote,
     };
 
     api.post(`/posts/${this.props.postID}`, vote, {headers: {
       'Authorization': 'Qualquer Coisa'
     }} )
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        
       })
   }
 
   handleChangeUpVote = () => {
-    this.setState({ option: 'upVote' });
-    this.handleSubmit()
+    this.handleSubmit('upVote')
   }
 
   handleChangeDownVote = () => {
-    this.setState({ option: 'downVote' });
-    this.handleSubmit()
+    this.handleSubmit('downVote')
   }
   
   render() {

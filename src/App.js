@@ -21,23 +21,21 @@ function App() {
         <Grid container spacing={3}>
           <Cabecalho/>
           <Grid item xs={12}>
-            
-              <Switch>
-                <Route exact path="/">
-                  <Categorias/>
-                  <PostList />
-                  <NavLink className="newPostButton" exact to="cadastrar/postagem">
-                    <Fab color="primary" aria-label="add">
-                      <AddIcon/>
-                    </Fab>
-                  </NavLink>
-                </Route>
-                <Route exact path="/categoria/:name" component={PostList}></Route>
-                <Route exact path="/postagem/:id" component={PostagemExpandida}></Route>
-                <Route exact path="/cadastrar/postagem" component={FormPostagem}></Route>
-                <Route exact path="/editar/postagem/:id" component={FormPostagem}></Route>
-              </Switch>
-            
+            <Switch>
+              <Route exact path="/">
+                <Categorias/>
+                <PostList />
+                <NavLink className="newPostButton" exact to="cadastrar/postagem">
+                  <Fab color="primary" aria-label="add">
+                    <AddIcon/>
+                  </Fab>
+                </NavLink>
+              </Route>
+              <Route exact path="/categoria/:name" component={PostList}></Route>
+              <Route exact path="/postagem/:id" component={PostagemExpandida}></Route>
+              <Route exact path="/cadastrar/postagem" component={FormPostagem}></Route>
+              <Route exact path="/editar/postagem/:id" component={FormPostagem}></Route>
+            </Switch>
           </Grid>
         </Grid>
         </Router>

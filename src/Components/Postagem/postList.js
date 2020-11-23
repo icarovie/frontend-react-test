@@ -18,7 +18,7 @@ export default class PostList extends React.Component {
     if(this.props.match?.params?.name){
       requestURL = `${this.props.match?.params?.name}/posts`
     }
-    console.log(requestURL);
+
     api.get(`${requestURL}`,{
         headers: {
             'Authorization': 'Qualquer Coisa'
@@ -55,3 +55,17 @@ export default class PostList extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return{
+
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  };
+};
+
+// export default connect(mapStateToProps, mapDispatchToProps)(PostList)
